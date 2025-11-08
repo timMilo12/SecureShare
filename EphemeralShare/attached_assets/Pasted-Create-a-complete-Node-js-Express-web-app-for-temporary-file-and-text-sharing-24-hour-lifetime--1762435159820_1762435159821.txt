@@ -1,0 +1,43 @@
+Create a complete Node.js + Express web app for temporary file and text sharing (24-hour lifetime).
+
+Functionality:
+	•	User creates a numbered slot (random 6–8-digit numeric ID).
+	•	They set a password for that slot.
+	•	They can upload files and/or text to that slot.
+	•	Anyone can access the slot from any device by entering the slot number and password.
+	•	The slot and all contents are automatically deleted after 24 hours.
+
+Technical requirements:
+	1.	Backend: Node.js with Express
+	2.	Frontend: simple HTML, CSS, and JavaScript (no frameworks)
+	3.	Database: use a lightweight local JSON database or SQLite for storing slot metadata (slotId, password hash, timestamps, file info).
+	4.	File storage: store uploaded files locally in a /uploads folder.
+	5.	Security:
+	•	Hash passwords using argon2
+	•	Limit wrong password attempts
+	•	Delete files + metadata after 24 hours
+	6.	Automatic cleanup: a background cleanup job that runs every hour to delete expired slots and files.
+	7.	API routes:
+	•	POST /api/slot → create a slot (returns slotId, expiry time)
+	•	POST /api/upload/:slotId → upload file/text with password
+	•	GET /api/slot/:slotId → access slot (requires password)
+	•	DELETE /api/slot/:slotId → manually delete slot
+	8.	Frontend pages:
+	•	index.html — start page with “Create Slot” and “Open Slot” buttons
+	•	create.html — lets user set a password and upload text/files
+	•	open.html — lets user enter slot number and password to view/download
+	•	Show countdown timer until slot expiration.
+	9.	Include all code:
+	•	server.js (Express server + cleanup scheduler)
+	•	package.json (dependencies like express, argon2, multer, cron, sqlite3/jsonfile)
+	•	Full HTML/JS frontend files
+	•	Example .env variables if needed
+	10.	Make it runnable instantly in Replit. After generation, I should be able to click “Run” and open the web app.
+
+Bonus (if time/space allows):
+	•	Generate 6–8-digit IDs that never collide.
+	•	Add a visible expiration countdown on the slot page.
+	•	Limit uploads to 50 MB max.
+	•	Include minimal CSS for readability.
+
+Output all code files in one Replit project, ready to run.
